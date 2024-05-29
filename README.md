@@ -43,8 +43,7 @@ frontend setup
 cd frontend        
 npm install
 
-**
-palaišana**
+**palaišana**
 
 cd frontend    
 npm run dev
