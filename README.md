@@ -28,15 +28,15 @@ php artisan migrate
 php artisan migrate:fresh --seed
 php artisan passport:client --personal
 
-In the .env file, config the db
-
+env faila config:
+```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=rvtgtr
 DB_USERNAME=root
 DB_PASSWORD=
-
+```
 frontend setup
 cd frontend        
 npm install
