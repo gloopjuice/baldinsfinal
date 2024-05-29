@@ -18,6 +18,7 @@ Priekš plugina
 backenda setups
  
 cd laravelBackend    
+composer update
 cp .env.example .env (iespējams nevajag, nezinu kā ir uz cita datora)
 composer install
 php artisan key:generate   
