@@ -1,7 +1,8 @@
 # baldinsfinal
 jomajo beidzot iet
 
-Kas tika izmantots:
+**Kas tika izmantots:**
+Mājaslapai
 
     Laravel
     Node.js
@@ -9,10 +10,11 @@ Kas tika izmantots:
     MySQL
 
 Priekš plugina 
- C++ ar JUCE
+
+ C++ ar JUCE framework
 
 
-lai mājaslapu palaistu:
+**lai mājaslapu palaistu:**
 backenda setups
  
 cd laravelBackend    
@@ -41,7 +43,8 @@ frontend setup
 cd frontend        
 npm install
 
-palaišana
+**
+palaišana**
 
 cd frontend    
 npm run dev
