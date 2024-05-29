@@ -28,7 +28,9 @@ php artisan storage:link
 composer require laravel/telescope --dev     
 php artisan telescope:install     
 php artisan migrate
+
 php artisan migrate:fresh --seed
+
 php artisan passport:client --personal
 
 env faila config:
