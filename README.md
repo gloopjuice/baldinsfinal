@@ -5,7 +5,7 @@ Kas tika izmantots:
 
     Laravel
     Node.js
-    Vue.js + ts
+    Vue.js
     MySQL
 
 Priekš plugina 
