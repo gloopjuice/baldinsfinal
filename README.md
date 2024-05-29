@@ -20,12 +20,16 @@ backenda setups
 cd laravelBackend    
 composer update
 cp .env.example .env (iespējams nevajag, nezinu kā ir uz cita datora)
+
 composer install
+
 php artisan key:generate   
 php artisan passport:keys    
 php artisan passport:client --personal    
-php artisan storage:link              
+php artisan storage:link    
+
 composer require laravel/telescope --dev     
+
 php artisan telescope:install     
 php artisan migrate
 
