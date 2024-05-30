@@ -64,7 +64,7 @@ export default {
   methods: {
     async getForumPosts() {
       try {
-        const response = await axios.get('/getAllForumPosts', {
+        const response = await axios.get('/api/getAllForumPosts', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`
           }
@@ -85,7 +85,7 @@ export default {
     },
     async fetchProfile() {
       try {
-        const response = await axios.get('/getUserProfile', {
+        const response = await axios.get('/api/getUserProfile', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`
           }
@@ -103,7 +103,7 @@ export default {
       try {
         const profileData = await this.fetchProfile();
         if (profileData) {
-          const response = await axios.post('/createForumPost', {
+          const response = await axios.post('/api/createForumPost', {
             nosaukums: this.newPostTitle,
             saturs: this.newPostContent,
             autors: profileData.id
