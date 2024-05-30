@@ -1,10 +1,6 @@
 <<<<<<< HEAD
 # RVTGTR
 
-BEIDZOT
-=======
-# baldinsfinal
-jomajo beidzot iet
 
 **Kas tika izmantots:**
 Mājaslapai
