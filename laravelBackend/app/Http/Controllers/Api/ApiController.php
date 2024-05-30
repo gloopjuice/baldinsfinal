@@ -10,8 +10,47 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+
 class ApiController extends Controller
 {
+    public function updateComment(Request $request, $id)
+    {
+        $request->validate([
+            'content' => 'required|string',
+        ]);
+
+        $comment = Comment::find($id);
+
+        if (!$comment) {
+            return response()->json(['status' => false, 'message' => 'Comment not found'], 404);
+        }
+
+        if ($comment->author_id !== Auth::id() && Auth::user()->role_id !== 1) {
+            return response()->json(['status' => false, 'message' => 'Unauthorized'], 403);
+        }
+
+        $comment->content = $request->content;
+        $comment->save();
+
+        return response()->json(['status' => true, 'message' => 'Comment updated successfully']);
+    }
+
+    public function deleteComment($id)
+    {
+        $comment = Comment::find($id);
+
+        if (!$comment) {
+            return response()->json(['status' => false, 'message' => 'Comment not found'], 404);
+        }
+
+        if ($comment->author_id !== Auth::id() && Auth::user()->role_id !== 1) {
+            return response()->json(['status' => false, 'message' => 'Unauthorized'], 403);
+        }
+
+        $comment->delete();
+
+        return response()->json(['status' => true, 'message' => 'Comment deleted successfully']);
+    }
     public function register(Request $request){
         $request->validate([
             "username" => "required",

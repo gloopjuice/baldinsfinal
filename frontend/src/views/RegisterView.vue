@@ -66,7 +66,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 body {
   display: flex;
@@ -77,7 +76,6 @@ body {
   background-color: #f0f0f0;
 }
 
-
 .RegWindow {
   display: flex;
   flex-direction: column;
@@ -86,7 +84,6 @@ body {
   width: 100%;
   max-width: 450px;
 }
-
 
 #header {
   font-family: "Inter", sans-serif;
@@ -98,11 +95,9 @@ body {
   stroke: 4px #ffffff; /* Standard */
 }
 
-
 #input-container {
   margin-bottom: 20px;
 }
-
 
 input {
   display: block;
@@ -119,14 +114,10 @@ input {
   padding: 0 15px; /* Added padding for better touch experience */
 }
 
-
-
-
 input::placeholder {
   color: #000000;
   font-size: 16px;
 }
-
 
 #button-container {
   display: flex;
@@ -134,7 +125,6 @@ input::placeholder {
   margin-bottom: 20px;
   gap: 20px;
 }
-
 
 button {
   padding-top: 5px;
@@ -154,12 +144,10 @@ button {
   justify-content: center;
 }
 
-
 button:hover {
   transform: scale(1.10);
   border: 1px white solid;
 }
-
 
 #error-message {
   color: red;
@@ -168,37 +156,31 @@ button:hover {
   font-size: 16px;
 }
 
-
 #go-back {
-  display: inline-block; /* Change display to inline-block */
+  display: inline-block;
   margin-top: 10px;
-  margin-bottom: 20px; /* Add margin bottom to match the margin of other elements */
+  margin-bottom: 20px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   color: #00FF29;
   text-decoration: none;
   cursor: pointer;
-  text-align: center; /* Align text to the center */
-  width: 100%; /* Make it take up the full width */
+  text-align: center;
+  width: 100%;
 }
-
 
 .horizontal-line {
   position: fixed;
-  top: 60px;
+  top: 5vh; /* Adjusted to match the position in loginview */
   left: 0;
   height: 3px;
   background-color: white;
   width: 100%;
 }
 
-
-
-
 #go-back:hover {
   text-decoration: underline;
 }
-
 
 .bottom-text {
   position: fixed;
@@ -212,5 +194,3 @@ button:hover {
   text-align: center;
 }
 </style>
-
-

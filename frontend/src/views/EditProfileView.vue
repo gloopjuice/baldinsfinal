@@ -93,99 +93,134 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 #profile-box {
   background-color: #373737;
-  width: 45vw;
-  height: 80vh;
-  border-radius: 50px;
+  width: 90%;
+  max-width: 600px;
+  height: auto; /* Set height to auto */
+  max-height: 80vh; /* Set maximum height */
+  padding: 20px;
+  border-radius: 20px;
   display: flex;
-  flex-direction: column; /* Align children in a column */
-  justify-content: center; /* Center children vertically */
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  box-sizing: border-box;
+  overflow-y: scroll; /* Make profile box scrollable */
 }
 
 .profile-info-box {
   width: 100%;
   display: flex;
-  align-items: center; /* Center children horizontally */
-  margin-bottom: 20px; /* Adjust spacing between sections */
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
+
+.profile-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .profile-pic-container {
-    height: 150px;
-    width: 150px;
-    border: 2px solid white;
-    border-radius: 50%;
-    background-color: none;
-    margin-right: 20px;
-  }
+  height: 0;
+  width: 150px;
+  padding-top: 150px; /* Maintain a 1:1 aspect ratio */
+  border: 2px solid white;
+  border-radius: 50%;
+  background-color: none;
+  margin-right: 20px;
+  overflow: hidden; /* Hide overflow to prevent content distortion */
+}
 
 .profile-details {
   display: flex;
-  flex-direction: column; /* Align children in a column */
-  margin-left: 20px; /* Adjust spacing between picture and details */
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
-.change-username
-{
-  height: 5vh;
-  width: 15vh;
+.change-username,
+.bio-box {
+  width: 80%;
+  max-width: 400px;
   border-radius: 25px;
-  border: 0;
-  font-size: 20px;
+  border: 1px solid var(--color-text); /* Add thin border */
+  font-size: 16px;
   color: var(--color-text);
   background-color: var(--color-light-dark-red);
-  margin-bottom: 20px; /* Adjust spacing between inputs */
-  text-indent: 20px;
-}
-.bio-box {
-  height: 15vh;
-  width: 50vh;
-  border-radius: 25px;
-  border: 0;
-  font-size: 20px;
-  color: var(--color-text);
-  background-color: var(--color-light-dark-red);
-  margin-bottom: 20px; /* Adjust spacing between inputs */
-  text-indent: 20px;
-}
-
-.bio-box {
-  padding-left: 10px;
-  font-size: 18px;
-  border: 3px solid white;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .save-button,
-.edit-users-button{
+.edit-users-button,
+.delete-account-button {
   height: 40px;
-  width: 150px;
-  border: none;
+  width: 80%;
+  max-width: 300px;
+  border: 1px solid var(--color-text); /* Add thin border */
   border-radius: 25px;
   background-color: var(--color-red);
   color: var(--color-text);
   font: "Inter";
-  
   font-size: 16px;
   font-weight: 550;
   margin-top: 20px;
-  align-self: flex-start; /* Align buttons to the left */
+  align-self: center;
+  text-align: center;
 }
 
-.delete-account-button
-{
+.delete-account-button {
   color: red;
-  height: 40px;
-  width: 150px;
-  border: none;
-  border-radius: 25px;
-  background-color: var(--color-red);
+}
 
-  font: "Inter";
-  
-  font-size: 16px;
-  font-weight: 550;
-  margin-top: 20px;
-  align-self: flex-start; /* Align buttons to the left */
+@media (min-width: 768px) {
+  #profile-box {
+    width: 70%;
+    max-width: 600px;
+    height: auto;
+    padding: 40px;
+    border-radius: 50px;
+  }
+
+  .profile-info-box {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .profile-section {
+    margin-right: 20px;
+  }
+
+  .profile-pic-container {
+    height: 150px;
+    width: 150px;
+    margin-right: 20px;
+  }
+
+  .profile-details {
+    align-items: flex-start;
+    width: auto;
+  }
+
+  .change-username,
+  .bio-box {
+    width: 100%;
+    max-width: none;
+    font-size: 20px;
+  }
+
+  .save-button,
+  .edit-users-button,
+  .delete-account-button {
+    width: 150px;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 20px;
+  }
 }
 </style>

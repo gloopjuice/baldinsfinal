@@ -1,7 +1,7 @@
 <template>
   <div id="Header">
     <button id="menu-but" @click="toggleMenu()">
-      <svg id="menu-img" width="50px" height="50px" viewBox="0 0 24 24" stroke="white" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <svg id="menu-img" class="rotate" width="50px" height="50px" viewBox="0 0 24 24" stroke="white" fill="white" xmlns="http://www.w3.org/2000/svg">
         <path d="M3.83827 18.5097L11.1284 5.54947C11.5107 4.86982 12.4893 4.86982 12.8716 5.54947L20.1617 18.5097C20.5367 19.1763 20.055 20 19.2902 20H4.70985C3.94502 20 3.46331 19.1763 3.83827 18.5097Z" 
               stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
@@ -33,7 +33,7 @@
       <button class="button" @click="logout">Log Out</button>
     </div>
   </div>
-
+  <div v-if="showMenu" class="overlay" @click="toggleMenu"></div>
   <div class="horizontal-line"></div>
 </template>
 
@@ -59,23 +59,20 @@ export default {
   },
   methods: {
     toggleMenu() {
-      this.showMenu = !this.showMenu;
-      if (this.showMenu) {
-        this.$refs.sidebar.classList.add('show-menu');
-        this.$refs.sidebar.classList.remove('hide-menu');
-      } else {
-        this.$refs.sidebar.classList.remove('show-menu');
-        this.$refs.sidebar.classList.add('hide-menu');
-      }
-
+      this.showMenu =!this.showMenu;
+      const sidebar = this.$refs.sidebar;
       const menuImg = document.getElementById('menu-img');
+      
       if (this.showMenu) {
-        menuImg.classList.add('rotate');
-      } else {
-        menuImg.classList.remove('rotate');
-        // Force reflow to restart animation
-        void menuImg.offsetWidth;
+        sidebar.classList.add('show-menu');
+        sidebar.classList.remove('hide-menu');
         menuImg.classList.add('rotate-back');
+        menuImg.classList.remove('rotate');
+      } else {
+        sidebar.classList.remove('show-menu');
+        sidebar.classList.add('hide-menu');
+        menuImg.classList.remove('rotate-back');
+        menuImg.classList.add('rotate');
       }
     },
     fetchProfile(authToken) {
@@ -99,8 +96,7 @@ export default {
 };
 </script>
 
-<style>
-/* Styles remain unchanged */
+<style scoped>
 .horizontal-line {
   position: fixed;
   top: 5vh;
@@ -116,20 +112,20 @@ export default {
   left: 0;
   width: 100vw;
   height: 5vh;
-  background-color: #373737; /* Changed to desired color */
+  background-color: #373737;
   box-shadow: 0px 0px 100px 20px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
 #main-content {
-  margin-top: 5vh; /* Adjust based on the height of your header */
-  background-color: white; /* Or any contrasting color */
-  min-height: calc(100vh - 5vh); /* Ensures content takes full height minus header */
-  padding: 20px; /* Optional: Adds some padding around the content */
+  margin-top: 5vh;
+  background-color: white;
+  min-height: calc(100vh - 5vh);
+  padding: 20px;
 }
 
 #sidebar {
-  height: calc(100vh - 5vh); /* Adjusted height to fit within viewport */
+  height: calc(100vh - 5vh);
   width: 300px;
   background-color: var(--color-element);
   z-index: 2;
@@ -153,6 +149,9 @@ export default {
 }
 
 #menu-but {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 5vh;
   width: 50px;
   padding: 0;
@@ -161,14 +160,9 @@ export default {
 }
 
 #menu-img {
-  height: 5vh;
-  width: 50px;
-  top: 0;
-  left: 0;
-  display: flex;
-  position: absolute;
+  height: 100%;
+  width: 100%;
   transition: transform 0.5s;
-  transform: rotate(90deg); /* Initial rotation */
 }
 
 #profile-but {
@@ -192,7 +186,7 @@ export default {
 }
 
 .hide-menu {
-  animation: slideOut 0.5s forwards; /* Ensure this matches the keyframe animation */
+  animation: slideOut 0.5s forwards;
 }
 
 @keyframes slideIn {
@@ -228,10 +222,20 @@ export default {
 }
 
 .rotate {
-  transform: rotate(180deg); /* Rotate 90 degrees more from initial 90 degrees */
+  transform: rotate(90deg);
 }
 
 .rotate-back {
-  transform: rotate(90deg); /* Rotate back to initial 90 degrees */
+  transform: rotate(0deg);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 </style>

@@ -4,87 +4,94 @@
 
     <div id="post-details-content">
       <div v-if="post">
-         <!-- Return button -->
-         <button class="return-link" @click="$router.push('/forums_hub')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 17L7 7M7 7V16M7 7H16"/>
-          </svg>
-        </button>
+        <!-- Return button -->
+        <button class="return-link" aria-label="return to forums" @click="$router.push('/forums_hub')">Return to Forums</button>
 
         <!-- Edit button -->
-        <button v-if="isAuthorOrAdmin" class="return-link" @click="editPost">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9.65661 17L6.99975 17L6.99975 14M6.10235 14.8974L17.4107 3.58902C18.1918 2.80797 19.4581 2.80797 20.2392 3.58902C21.0202 4.37007 21.0202 5.6364 20.2392 6.41745L8.764 17.8926C8.22794 18.4287 7.95992 18.6967 7.6632 18.9271C7.39965 19.1318 7.11947 19.3142 6.8256 19.4723C6.49475 19.6503 6.14115 19.7868 5.43395 20.0599L3 20.9998L3.78312 18.6501C4.05039 17.8483 4.18403 17.4473 4.3699 17.0729C4.53497 16.7404 4.73054 16.424 4.95409 16.1276C5.20582 15.7939 5.50466 15.4951 6.10235 14.8974Z"/>
-          </svg>
-        </button>
+        <button v-if="isAuthorOrAdmin" aria-label="edit post" class="return-link svg-button" @click="showEditModal = true">Edit Post</button>
 
         <!-- Delete button -->
-        <button v-if="isAuthorOrAdmin" class="return-link" @click="deletePost">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"/>
-          </svg>
-        </button>
+        <button v-if="isAuthorOrAdmin" aria-label="delete post" class="return-link svg-button" @click="deletePost">Delete Post</button>
 
         <h1>{{ post.nosaukums }}</h1>
-
-       
-
         <p>{{ post.saturs }}</p>
         <p>Autors: {{ post.authorProfile.name }}</p>
         <p>Date: {{ post.created_at.slice(0, 10) }}</p>
 
+        <div style="margin-bottom: 2vh;"></div>
+
         <!-- Add Comment button -->
-        <button class="return-link" @click="showModal = true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 12H18M12 6V18" />
-          </svg>
-        </button>
+        <button class="return-link" aria-label="add comment" @click="showModal = true">Add Comment</button>
+
+        <div style="margin-bottom: 2vh"></div>
 
         <!-- Display comments -->
-        <div v-if="comments.length">
-          <h3>Comments:</h3>
-          <div v-for="(comment, index) in comments" :key="index" class="comment-wrapper">
-            <div>
-              <p><strong>Author:</strong> {{ comment.author.name }}</p>
-              <p><strong>Content:</strong> {{ comment.content }}</p>
-              <p><strong>Date:</strong> {{ comment.created_at.slice(0, 10) }}</p>
-            </div>
-          </div>
+        <div v-for="(comment, index) in comments" :key="index" class="comment-wrapper">
+  <div>
+    <p><strong>Author:</strong> {{ comment.author.name }}</p>
+    <p><strong>Content:</strong> {{ comment.content }}</p>
+    <p><strong>Date:</strong> {{ comment.created_at.slice(0, 10) }}</p>
+    <div>
+      <button @click="openEditCommentModal(comment.id)" class="edit-comment-button">Edit Comment</button>
+      <button @click="deleteComment(comment.id)" class="delete-comment-button" v-if="isAuthorOrAdmin">Delete Comment</button>
+    </div>
+  </div>
+</div>
         </div>
         <div v-else>
           <p>No comments yet.</p>
         </div>
       </div>
-
-      <!-- Add Comment Modal -->
-      <div v-if="showModal" class="modal">
-        <div class="modal-content">
-          <span class="close" @click="showModal = false">&times;</span>
-          <form @submit.prevent="addComment">
-            <label for="commentContent">Comment:</label>
-            <textarea id="commentContent" v-model="commentContent" required></textarea>
-            <button type="submit">Submit Comment</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Edit Post Modal -->
-      <div v-if="showEditModal" class="modal">
-        <div class="modal-content">
-          <span class="close" @click="showEditModal = false">&times;</span>
-          <form @submit.prevent="saveEditedPost">
-            <label for="editedTitle">Title:</label>
-            <input type="text" id="editedTitle" v-model="editedTitle" required>
-
-            <label for="editedContent">Content:</label>
-            <textarea id="editedContent" v-model="editedContent" required></textarea>
-
-            <button type="submit">Save Changes</button>
-          </form>
-        </div>
-      </div>
     </div>
+
+
+    <div v-if="showModal" class="modal-overlay" @click.self="showModal = false">
+  <div class="modal">
+    <span class="close" @click="showModal = false">&times;</span> <!-- Corrected class name -->
+    <form @submit.prevent="addComment">
+      <div>
+        <label for="commentContent">Comment:</label>
+        <textarea v-model="commentContent" placeholder="Enter your comment" class="modal-textarea" required></textarea>
+      </div>
+      <button type="submit" class="post-button">Add Comment</button>
+    </form>
   </div>
+</div>
+
+<!-- Edit Post Modal -->
+<div v-if="showEditModal" class="modal-overlay" @click.self="showEditModal = false">
+  <div class="modal">
+    <span class="close" @click="showEditModal = false">&times;</span>
+    <form @submit.prevent="saveEditedPost">
+      <div>
+        <label for="editedTitle">Title:</label>
+        <input type="text" v-model="editedTitle" placeholder="Enter title" class="modal-input" required>
+      </div>
+      <div>
+        <label for="editedContent">Content:</label>
+        <textarea v-model="editedContent" placeholder="Enter content" class="modal-textarea" required></textarea>
+      </div>
+      <button type="submit" class="post-button">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+
+
+<div v-if="showEditCommentModal" class="modal-overlay" @click.self="showEditCommentModal = false">
+    <div class="modal">
+    <span class="close" @click="showEditCommentModal = false">&times;</span>
+    <form @submit.prevent="updateComment">
+      <div>
+        <label for="editedCommentContent">Comment:</label>
+        <textarea v-model="editedCommentContent" placeholder="Edit your comment" class="modal-textarea" required></textarea>
+      </div>
+      <button type="submit" class="post-button">Update Comment</button>
+    </form>
+  </div>
+</div>   
+
+  
 </template>
 
 <script>
@@ -102,6 +109,9 @@ export default {
       editedTitle: '',
       editedContent: '',
       currentUser: null, // To hold the current user information
+      showEditCommentModal: false,
+      editingCommentId: null,
+      editedCommentContent: '',
     };
   },
   computed: {
@@ -110,6 +120,26 @@ export default {
     },
   },
   methods: {
+    async deleteComment(commentId) {
+      if (!confirm('Are you sure you want to delete this comment?')) return;
+      const token = localStorage.getItem('authToken');
+      try {
+        const response = await axios.delete(`/deleteComment/${commentId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (response.data && response.data.status) {
+          alert('Comment deleted successfully');
+          await this.fetchComments(this.post.id); // Refresh the comments list
+        } else {
+          alert('Error deleting comment');
+        }
+      } catch (error) {
+        console.error('Error deleting comment:', error);
+        alert('Error deleting comment');
+      }
+    },
     async getPost(id) {
       const token = localStorage.getItem('authToken');
       try {
@@ -258,7 +288,40 @@ export default {
         alert('Error editing post');
       }
     },
+    async openEditCommentModal(commentId) {
+      this.editingCommentId = commentId;
+      this.showEditCommentModal = true;
+      // Assuming comment data is already available in this.comments
+      const comment = this.comments.find(c => c.id === commentId);
+      if (comment) {
+        this.editedCommentContent = comment.content;
+      }
+    },
+    async updateComment() {
+      const token = localStorage.getItem('authToken');
+      const commentId = this.editingCommentId;
+      try {
+        const response = await axios.put(`/updateComment/${commentId}`, {
+          content: this.editedCommentContent
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (response.data && response.data.status) {
+          alert('Comment updated successfully');
+          this.showEditCommentModal = false;
+          await this.fetchComments(this.post.id);
+        } else {
+          alert('Error updating comment');
+        }
+      } catch (error) {
+        console.error('Error updating comment:', error);
+        alert('Error updating comment');
+      }
+    },
   },
+  
   mounted() {
     const postId = this.$route.params.postId;
     this.getPost(postId);
@@ -271,66 +334,147 @@ export default {
 
 <style scoped>
 #post-details-content {
-  margin-top: 10vh; /* Adjust this value if necessary */
-  padding: 20px;
-  margin-bottom: 10vh; /* Add margin to the bottom */
-}
-.comment-wrapper {
-  margin-bottom: 20px; /* Adjust the value as needed */
-}
-
-.return-link-container {
-  text-align: left;
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2vh;
+  box-sizing: border-box;
 }
 
 .return-link {
-  display: inline-block;
-  padding: 10px 15px;
-  color: #FFFFFF;
-  background-color: #007BFF; /* Add background color */
-  border: none; /* Remove default button border */
-  border-radius: 5px; /* Add border radius for a smoother look */
-  text-decoration: none;
+  padding: 1vh 2vh;
+  font-size: 1.6vh;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .return-link:hover {
-  background-color: #0056b3; /* Darker background color on hover */
+  background-color: #45a049; /* Darker Green */
 }
 
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+.comment-wrapper {
+  border: 1px solid #ccc;
+  padding: 1vh;
+  margin-bottom: 1.5vh;
+  border-radius: 0.5vh;
 }
 
 .modal-content {
-  padding: 20px;
-  border-radius: 5px;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 2vh;
+  border: 1px solid #888;
   width: 80%;
   max-width: 500px;
-  background-color: #fff; /* Add background color */
+  border-radius: 5px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.svg-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-input,
+.modal-textarea {
+  width: 100%;
+  padding: 1vh;
+  margin-bottom: 2vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.6vh;
+  box-sizing: border-box;
+}
+
+.modal-textarea {
+  width: 100%;
+  padding: 1vh;
+  margin-bottom: 2vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.6vh;
+  box-sizing: border-box;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999; /* Ensure it's on top of other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add some shadow for depth */
+  position: relative; /* Ensure the close button is positioned relative to the modal */
+}
+
+
+.post-button {
+  padding: 1vh 2vh;
+  font-size: 1.6vh;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.post-button:hover {
+  background-color: #45a049; /* Darker Green */
 }
 
 .close {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888; /* Gray color */
 }
 
-.close:hover,
+.close:hover {
+  color: #555; /* Darker gray on hover */
+}
+
 .close:focus {
-  color: #000;
+  color: black;
   text-decoration: none;
   cursor: pointer;
 }
+.edit-comment-button,
+.delete-comment-button  {
+  padding-top: 1vh; /* Adjust the padding as needed */
+  padding-bottom: 1vh; /* Adjust the padding as needed */
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-comment-button:hover,
+  .delete-comment-button:hover {
+    background-color: #45a049; /* Darker Green */
+  }
+
+  .delete-comment-button {
+    margin-left: 1vh; /* Add margin to separate buttons */
+  }
 </style>
