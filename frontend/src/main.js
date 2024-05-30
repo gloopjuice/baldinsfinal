@@ -7,7 +7,7 @@ import header from './components/Header.vue'
 
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api-21dp2ggaga.kvalifikacija.rvt.lv/login/api/';
+axios.defaults.baseURL = 'https://api-21dp2ggaga.kvalifikacija.rvt.lv';
 
 const app = createApp(App)
 
