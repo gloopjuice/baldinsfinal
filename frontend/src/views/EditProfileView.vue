@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     fetchProfile(authToken){
-      axios.get('/getUserProfile', {
+      axios.get('/api/getUserProfile', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -61,7 +61,7 @@ export default {
         console.error('Authentication token not found.');
         return;
       }
-      axios.post('/updateProfile', {
+      axios.post('/api/updateProfile', {
         bio: this.profileData.bio,
         username: this.profileData.username
       }, {
@@ -78,7 +78,7 @@ export default {
     deleteProfile(){
       const authToken = localStorage.getItem('authToken');
       localStorage.removeItem('authToken');
-      axios.delete('http://127.0.0.1:8000/api/deleteProfile').then(response => {
+      axios.delete('/api/deleteProfile').then(response => {
         console.log(response.data.message);
         alert('Account deleted successfully');
         this.$router.push('/login');
