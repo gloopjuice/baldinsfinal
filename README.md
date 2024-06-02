@@ -25,7 +25,6 @@ backenda setups
 
     php artisan key:generate   
     php artisan passport:keys    
-    php artisan passport:client --personal    
     php artisan storage:link    
 
     composer require laravel/telescope --dev     
