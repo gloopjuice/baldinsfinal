@@ -24,6 +24,7 @@
     </table>
     <router-link to="/EditProfileView" id="go-back">Go back</router-link>
 
+    
     <div v-if="isEditing" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -132,7 +133,7 @@ export default {
         delete formData.password;
       }
 
-      axios.put(`/updateUserProfile/${this.editForm.id}`, formData, {
+      axios.put(`/api/updateUserProfile/${this.editForm.id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
