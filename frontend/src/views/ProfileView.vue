@@ -15,7 +15,7 @@
             </div>
             <div class="text-info">
               <p class="username" v-if="profileData">{{ profileData.username }}</p>
-              <p class="savedBio" v-if="profileData">{{ profileData.bio }}</p>
+              <p class="savedBio" style="padding-left: 1vh;" v-if="profileData">{{ profileData.bio }}</p>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     fetchProfile(authToken) {
-      axios.get('/api/getUserProfile', {
+      axios.get('/getUserProfile', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -146,7 +146,7 @@ export default {
 }
 
 .username {
-  font-size: 1.5rem;
+  font-size: 5rem;
   color: white;
   padding-left: 10px;
 }
@@ -156,6 +156,7 @@ export default {
   color: white;
   margin-top: 10px;
   overflow-wrap: break-word;
+  padding-left: 5px;
 }
 
 .profile-details {
@@ -183,6 +184,7 @@ export default {
   }
 
   .savedBio {
+
     font-size: 1rem;
   }
 }

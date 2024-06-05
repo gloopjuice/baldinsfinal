@@ -88,7 +88,7 @@ export default {
     deleteProfile() {
       const authToken = localStorage.getItem('authToken');
       localStorage.removeItem('authToken');
-      axios.delete('/api/deleteProfile').then(response => {
+      axios.delete('/deleteProfile').then(response => {
         console.log(response.data.message);
         alert('Account deleted successfully');
         this.$router.push('/login');
@@ -98,10 +98,10 @@ export default {
       });
     },
     navigateToUserManagement() {
-      this.$router.push('/UserManagementView');
+      this.$router.push('/api/UserManagementView');
     },
     editProfile() {
-      this.$router.push('/EditProfileView');
+      this.$router.push('/api/EditProfileView');
     },
     uploadProfilePicture(event) {
       const file = event.target.files[0];
@@ -302,4 +302,48 @@ export default {
     resize: none; /* Ensure bio field is non-resizable */
   }
 }
+
+.post-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.post-button:hover {
+  background-color: #45a049;
+}
+
+.save-button,
+.edit-users-button,
+.delete-account-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.save-button,
+.edit-users-button
+{
+  background-color: #4CAF50;
+}
+.delete-account-button
+{
+background-color: #FF0000;
+}
+.delete-account-button:hover {
+  background-color: #8b1d1d; 
+}
+.save-button:hover,
+.edit-users-button:hover{
+  background-color: #45a049;
+}
+
 </style>
