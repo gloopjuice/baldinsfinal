@@ -101,7 +101,7 @@ export default {
       this.$router.push('/UserManagementView');
     },
     editProfile() {
-      this.$router.push('/api/EditProfileView');
+      this.$router.push('/EditProfileView');
     },
     uploadProfilePicture(event) {
       const file = event.target.files[0];
