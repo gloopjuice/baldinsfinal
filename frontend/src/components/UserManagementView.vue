@@ -85,74 +85,76 @@ export default {
     };
   },
   methods: {
-  fetchAllUsers() {
-    axios.get('/api/getAllUsers', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
-      }
-    })
-    .then(response => {
-      this.users = response.data.users;
-    })
-    .catch(error => {
-      console.error('Error fetching users:', error);
-    });
-  },
-  deleteUser(userId) {
-    axios.delete(`/api/deleteUserProfile/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
-      }
-    })
-    .then(response => {
-      alert('User profile deleted successfully');
-      this.fetchAllUsers(); 
-    })
-    .catch(error => {
-      console.error('Error deleting user profile:', error);
-      alert('Problem deleting user profile');
-    });
-  },
-  editUser(user) {
-    this.editForm = { ...user, password: '' }; 
-    this.isEditing = true;
-  },
-  updateUser() {
-    const hasChanges = Object.keys(this.editForm).some(key => key !== 'password' && this.editForm[key] !== this.users.find(user => user.id === this.editForm.id)[key]);
+    fetchAllUsers() {
+      axios.get('/api/getAllUsers', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`
+        }
+      })
+      .then(response => {
+        this.users = response.data.users;
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+      });
+    },
+    deleteUser(userId) {
+      axios.delete(`/api/deleteUserProfile/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`
+        }
+      })
+      .then(response => {
+        alert('User profile deleted successfully');
+        this.fetchAllUsers(); 
+      })
+      .catch(error => {
+        console.error('Error deleting user profile:', error);
+        alert('Problem deleting user profile');
+      });
+    },
+    editUser(user) {
+      this.editForm = { ...user, password: '' }; 
+      this.isEditing = true;
+    },
+    updateUser() {
+     
+      const hasChanges = Object.keys(this.editForm).some(key => key !== 'password' && this.editForm[key] !== this.users.find(user => user.id === this.editForm.id)[key]);
 
-    if (!hasChanges && !this.editForm.password) {
-      this.closeEditModal();
-      return;
+
+      if (!hasChanges && !this.editForm.password) {
+        this.closeEditModal();
+        return;
+      }
+
+      // Create a copy of the editForm without the password if it's empty
+      const formData = { ...this.editForm };
+      if (!formData.password) {
+        delete formData.password;
+      }
+
+      axios.put(`/api/updateUserProfile/${this.editForm.id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`
+        }
+      })
+      .then(response => {
+        alert('User profile updated successfully');
+        this.fetchAllUsers(); 
+        this.closeEditModal();
+      })
+      .catch(error => {
+        console.error('Error updating user profile:', error);
+        alert('Problem updating user profile');
+      });
+    },
+    closeEditModal() {
+      this.isEditing = false;
     }
-
-    const formData = { ...this.editForm };
-    if (!formData.password) {
-      delete formData.password;
-    }
-
-    axios.put(`/api/updateUserProfile/${this.editForm.id}`, formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
-      }
-    })
-    .then(response => {
-      alert('User profile updated successfully');
-      this.fetchAllUsers(); 
-      this.closeEditModal();
-    })
-    .catch(error => {
-      console.error('Error updating user profile:', error);
-      alert('Problem updating user profile');
-    });
   },
-  closeEditModal() {
-    this.isEditing = false;
+  mounted() {
+    this.fetchAllUsers();
   }
-},
-mounted() {
-  this.fetchAllUsers();
-}
-
 };
 </script>
 
