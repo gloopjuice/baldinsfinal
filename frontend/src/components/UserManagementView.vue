@@ -105,7 +105,7 @@ export default {
       })
       .then(response => {
         alert('User profile deleted successfully');
-        this.fetchAllUsers(); // Refresh the user list after deletion
+        this.fetchAllUsers(); 
       })
       .catch(error => {
         console.error('Error deleting user profile:', error);
@@ -113,14 +113,14 @@ export default {
       });
     },
     editUser(user) {
-      this.editForm = { ...user, password: '' }; // Copy user data into edit form
+      this.editForm = { ...user, password: '' }; 
       this.isEditing = true;
     },
     updateUser() {
-      // Check if any fields other than password have been changed
+     
       const hasChanges = Object.keys(this.editForm).some(key => key !== 'password' && this.editForm[key] !== this.users.find(user => user.id === this.editForm.id)[key]);
 
-      // If there are no changes and the password field is empty, just close the modal
+
       if (!hasChanges && !this.editForm.password) {
         this.closeEditModal();
         return;
@@ -139,7 +139,7 @@ export default {
       })
       .then(response => {
         alert('User profile updated successfully');
-        this.fetchAllUsers(); // Refresh the user list after update
+        this.fetchAllUsers(); 
         this.closeEditModal();
       })
       .catch(error => {
