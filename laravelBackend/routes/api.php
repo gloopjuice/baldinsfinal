@@ -37,7 +37,7 @@ Route::group([
 
 
     Route::delete('/deleteUserProfile/{id}', [ApiController::class, 'deleteUserProfile']);
-    Route::post('/editUserProfile/{id}', [ApiController::class, 'editUserProfile']);
+    Route::put('/updateUserProfile/{id}', [ApiController::class, 'editUserProfile']);  // Ensure this line is correct
 
 
     Route::post('/createComment', [ApiController::class, 'createComment']);
