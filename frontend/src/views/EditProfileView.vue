@@ -88,7 +88,7 @@ export default {
     deleteProfile() {
       const authToken = localStorage.getItem('authToken');
       localStorage.removeItem('authToken');
-      axios.delete('/deleteProfile').then(response => {
+      axios.delete('/api/deleteProfile').then(response => {
         console.log(response.data.message);
         alert('Account deleted successfully');
         this.$router.push('/login');
