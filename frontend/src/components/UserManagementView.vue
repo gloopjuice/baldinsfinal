@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     fetchAllUsers() {
-      axios.get('getAllUsers', {
+      axios.get('/api/getAllUsers', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -98,7 +98,7 @@ export default {
       });
     },
     deleteUser(userId) {
-      axios.delete(`deleteUserProfile/${userId}`, {
+      axios.delete(`/api/deleteUserProfile/${userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -132,7 +132,7 @@ export default {
         delete formData.password;
       }
 
-      axios.put(`updateUserProfile/${this.editForm.id}`, formData, {
+      axios.put(`/api/updateUserProfile/${this.editForm.id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
