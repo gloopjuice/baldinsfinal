@@ -64,12 +64,9 @@ export default {
 
 
 <style scoped>
-
-
 .LoginWindow {
   text-align: center;
 }
-
 
 #header {
   font-family: "Inter", sans-serif;
@@ -81,11 +78,9 @@ export default {
   text-stroke: 4px #ffffff; /* Standard */
 }
 
-
 #input-container {
   margin-bottom: 20px;
 }
-
 
 input {
   display: block;
@@ -102,12 +97,10 @@ input {
   padding: 0 15px; /* Added padding for better touch experience */
 }
 
-
 input::placeholder {
   color: #000000;
   font-size: 16px;
 }
-
 
 #ForgotPass {
   padding-top: 5px;
@@ -118,13 +111,11 @@ input::placeholder {
   margin-top: 10px;
 }
 
-
 #button-container {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
-
 
 button, #register-but {
   height: 45px;
@@ -143,7 +134,6 @@ button, #register-but {
   justify-content: center;
 }
 
-
 .horizontal-line {
   position: fixed;
   top: 5vh;
@@ -152,7 +142,6 @@ button, #register-but {
   background-color: white;
   width: 100%;
 }
-
 
 .bottom-text {
   position: fixed;
@@ -165,12 +154,31 @@ button, #register-but {
   color: #FFFFFF;
   text-align: center;
 }
-body
-{
+
+body {
   overflow-y: hidden;
 }
+
+@media (max-width: 768px) {
+ .LoginWindow {
+    padding-top: 7vh; /* Increase padding from the top for mobile */
+  }
+
+  #input-container {
+    width: 90%; /* Make inputs responsive */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  input {
+    width: 100%; /* Full width inputs for mobile */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+
+
+
+ .bottom-text {
+    font-size: 12px; /* Optional adjustment for smaller screens */
+  }
+}
 </style>
-
-
-
-

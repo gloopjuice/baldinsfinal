@@ -2,7 +2,7 @@
   <Header />
   <div class="container">
     <h1 class="title">JAUNĀ RVTGTR VERSIJA IR KLĀT!</h1>
-    <h2>KAS JAUNS? ŠAJĀ VERSIJĀ IR JAUNI KLOĶĪŠI KO PAGROZĪT, KAS MAINA SKAŅU!</h2>
+    <h2 class="subtitle">KAS JAUNS? ŠAJĀ VERSIJĀ IR JAUNI KLOĶĪŠI KO PAGROZĪT, KAS MAINA SKAŅU!</h2>
   </div>
 </template>
 
@@ -17,7 +17,24 @@
 
 .title {
   font-size: 10vh;
-  white-space: nowrap; /* Prevent line break */
+  animation: fadeInScale 1s ease-in-out; /* Apply the animation */
+}
+
+.subtitle {
+  animation: fadeInScale 1s ease-in-out; /* Apply the same speed animation */
+  animation-delay: 1s; /* Delay the animation by 1 second */
+  animation-fill-mode: both; /* Retain the final state of the animation */
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Override scrollbar hiding rules for HomeView.vue */
@@ -50,6 +67,13 @@
     padding: 0 2rem;
   }
 }
+
+/* Apply padding to h1 on mobile devices */
+@media (max-width: 767px) {
+  .title {
+    padding-top: 8vh; /* Adjust padding as needed */
+  }
+}
 </style>
 
 <script>
@@ -57,8 +81,8 @@ import Header from '../components/Header.vue'
 
 export default {
   name: "Home",
-  components:{
-      Header
+  components: {
+    Header
   }
 }
 </script>

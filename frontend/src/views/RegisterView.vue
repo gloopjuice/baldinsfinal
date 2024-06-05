@@ -65,7 +65,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 body {
   display: flex;
@@ -90,9 +89,9 @@ body {
   font-size: 80px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #00FF29; /* Original green color */
-  -webkit-text-stroke: 4px #ffffff; /* Chrome, Safari */
-  stroke: 4px #ffffff; /* Standard */
+  color: #00FF29;
+  -webkit-text-stroke: 4px #ffffff;
+  stroke: 4px #ffffff;
 }
 
 #input-container {
@@ -102,7 +101,7 @@ body {
 input {
   display: block;
   height: 40px;
-  width: 800px; /* Increased width */
+  width: 800px;
   border-radius: 15px;
   border: 0;
   font-size: 18px;
@@ -111,7 +110,7 @@ input {
   color: #000000;
   background-color: #ffffff;
   margin: 10px auto;
-  padding: 0 15px; /* Added padding for better touch experience */
+  padding: 0 15px;
 }
 
 input::placeholder {
@@ -171,7 +170,7 @@ button:hover {
 
 .horizontal-line {
   position: fixed;
-  top: 5vh; /* Adjusted to match the position in loginview */
+  top: 5vh;
   left: 0;
   height: 3px;
   background-color: white;
@@ -192,5 +191,29 @@ button:hover {
   font-size: 14px;
   color: #FFFFFF;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+ .RegWindow {
+    padding-top: 7vh;
+  }
+
+  #input-container {
+    width: 127%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 11vh;
+  }
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
+
+ .bottom-text {
+    font-size: 12px;
+  }
 }
 </style>

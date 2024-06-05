@@ -1,16 +1,13 @@
 <template>
   <div>
     <Header />
-
-    <div id="post-details-content">
+    <div id="post-details-content" style="padding-top: 8vh; @media only screen and (max-width: 600px) { padding-top: 9vh; }">
       <div v-if="post">
         <!-- Return button -->
         <button class="return-link" aria-label="return to forums" @click="$router.push('/forums_hub')">Return to Forums</button>
 
-        <!-- Edit button -->
         <button v-if="isAuthorOrAdmin" aria-label="edit post" class="return-link svg-button" @click="showEditModal = true">Edit Post</button>
 
-        <!-- Delete button -->
         <button v-if="isAuthorOrAdmin" aria-label="delete post" class="return-link svg-button" @click="deletePost">Delete Post</button>
 
         <h1>{{ post.nosaukums }}</h1>
@@ -20,12 +17,11 @@
 
         <div style="margin-bottom: 2vh;"></div>
 
-        <!-- Add Comment button -->
+
         <button class="return-link" aria-label="add comment" @click="showModal = true">Add Comment</button>
 
         <div style="margin-bottom: 2vh"></div>
 
-        <!-- Display comments -->
         <div v-for="(comment, index) in comments" :key="index" class="comment-wrapper">
   <div>
     <p><strong>Author:</strong> {{ comment.author.name }}</p>
@@ -124,7 +120,7 @@ export default {
       if (!confirm('Are you sure you want to delete this comment?')) return;
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.delete(`/api/deleteComment/${commentId}`, {
+        const response = await axios.delete(`/deleteComment/${commentId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -143,7 +139,7 @@ export default {
     async getPost(id) {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get(`/api/getForumPost?id=${id}`, {
+        const response = await axios.get(`/getForumPost?id=${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -166,7 +162,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const postId = this.$route.params.postId;
       try {
-        const response = await axios.post(`/api/createComment`, {
+        const response = await axios.post(`/createComment`, {
           post_id: postId,
           author_id: this.currentUser.id,
           content: this.commentContent
@@ -191,7 +187,7 @@ export default {
     async fetchProfile(authorId) {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get(`/api/getUserProfile?id=${authorId}`, {
+        const response = await axios.get(`/getUserProfile?id=${authorId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -205,7 +201,7 @@ export default {
     async fetchComments(postId) {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get('/api/getComments', {
+        const response = await axios.get('/getComments', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -226,7 +222,7 @@ export default {
     async fetchCurrentUser() {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get('/api/profile', {
+        const response = await axios.get('/profile', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -243,7 +239,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const postId = this.post.id;
       try {
-        const response = await axios.delete(`/api/deletePost/${postId}`, {
+        const response = await axios.delete(`/deletePost/${postId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -268,7 +264,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const postId = this.post.id;
       try {
-        const response = await axios.post(`/api/editForumPost/${postId}`, {
+        const response = await axios.post(`/editForumPost/${postId}`, {
           nosaukums: this.editedTitle,
           saturs: this.editedContent
         }, {
@@ -301,7 +297,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const commentId = this.editingCommentId;
       try {
-        const response = await axios.put(`/api/updateComment/${commentId}`, {
+        const response = await axios.put(`/updateComment/${commentId}`, {
           content: this.editedCommentContent
         }, {
           headers: {
@@ -333,6 +329,9 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 #post-details-content {
   width: 100%;
   max-width: 1200px;

@@ -76,7 +76,7 @@ export default {
       }
     },
     fetchProfile(authToken) {
-      axios.get('/api/getUserProfile', {
+      axios.get('/getUserProfile', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -157,6 +157,15 @@ export default {
   padding: 0;
   background: transparent;
   border: 0;
+  transform: rotate(-90deg);
+}
+
+.rotate {
+  transform: rotate(-180deg);
+}
+
+.rotate-back {
+  transform: rotate(-90deg);
 }
 
 #menu-img {
@@ -221,13 +230,7 @@ export default {
   text-align: center;
 }
 
-.rotate {
-  transform: rotate(90deg);
-}
 
-.rotate-back {
-  transform: rotate(0deg);
-}
 
 .overlay {
   position: fixed;

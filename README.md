@@ -1,5 +1,6 @@
 # RVTGTR
-
+**Kas ir RVTGTR**
+RVTGTR sastāv no divām daļām, mājaslapas un audio spraudņa (audio plugin). Majaslapā ir logins un reģistrācija, downloadpage, kā arī forums, kurā tu vari izveidot forumā rakstus, lai atstātu ieteikumus uzlabojumiem un komentēt zem viņiem. Protams ir arī administrācijas panelis, kurā var rediģēt lietotāju informāciju, kā arī ir izdzēšanas iespējas. Otrā daļa ir pats spraudnis, ar kuru ir iespējams izmainīt audio signāla īpašības.
 
 **Kas tika izmantots:**
 Mājaslapai
