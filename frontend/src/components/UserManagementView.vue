@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     fetchAllUsers() {
-      axios.get('/getAllUsers', {
+      axios.get('/api/getAllUsers', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -83,7 +83,7 @@ export default {
       });
     },
     deleteUser(userId) {
-      axios.delete(`/deleteUserProfile/${userId}`, {
+      axios.delete(`/api/deleteUserProfile/${userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -102,7 +102,7 @@ export default {
       this.isEditing = true;
     },
     updateUser() {
-      axios.put(`/updateUserProfile/${this.editForm.id}`, this.editForm, {
+      axios.put(`/api/updateUserProfile/${this.editForm.id}`, this.editForm, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }

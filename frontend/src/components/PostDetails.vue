@@ -120,7 +120,7 @@ export default {
       if (!confirm('Are you sure you want to delete this comment?')) return;
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.delete(`/deleteComment/${commentId}`, {
+        const response = await axios.delete(`/api/deleteComment/${commentId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -139,7 +139,7 @@ export default {
     async getPost(id) {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get(`/getForumPost?id=${id}`, {
+        const response = await axios.get(`/api/getForumPost?id=${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -162,7 +162,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const postId = this.$route.params.postId;
       try {
-        const response = await axios.post(`/createComment`, {
+        const response = await axios.post(`/api/createComment`, {
           post_id: postId,
           author_id: this.currentUser.id,
           content: this.commentContent
@@ -187,7 +187,7 @@ export default {
     async fetchProfile(authorId) {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get(`/getUserProfile?id=${authorId}`, {
+        const response = await axios.get(`/api/getUserProfile?id=${authorId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -201,7 +201,7 @@ export default {
     async fetchComments(postId) {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get('/getComments', {
+        const response = await axios.get('/api/getComments', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -222,7 +222,7 @@ export default {
     async fetchCurrentUser() {
       const token = localStorage.getItem('authToken');
       try {
-        const response = await axios.get('/profile', {
+        const response = await axios.get('/api/profile', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -239,7 +239,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const postId = this.post.id;
       try {
-        const response = await axios.delete(`/deletePost/${postId}`, {
+        const response = await axios.delete(`/api/deletePost/${postId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -264,7 +264,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const postId = this.post.id;
       try {
-        const response = await axios.post(`/editForumPost/${postId}`, {
+        const response = await axios.post(`/api/editForumPost/${postId}`, {
           nosaukums: this.editedTitle,
           saturs: this.editedContent
         }, {
@@ -297,7 +297,7 @@ export default {
       const token = localStorage.getItem('authToken');
       const commentId = this.editingCommentId;
       try {
-        const response = await axios.put(`/updateComment/${commentId}`, {
+        const response = await axios.put(`/api/updateComment/${commentId}`, {
           content: this.editedCommentContent
         }, {
           headers: {
