@@ -98,7 +98,7 @@ export default {
       });
     },
     navigateToUserManagement() {
-      this.$router.push('/api/UserManagementView');
+      this.$router.push('/UserManagementView');
     },
     editProfile() {
       this.$router.push('/api/EditProfileView');
