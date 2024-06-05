@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     fetchProfile(authToken) {
-      axios.get('/api/getUserProfile', {
+      axios.get('/getUserProfile', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }

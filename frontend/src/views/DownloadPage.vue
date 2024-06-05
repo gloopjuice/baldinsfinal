@@ -66,7 +66,7 @@
         formData.append('file', this.selectedFile);
 
         try {
-          const response = await axios.post('/api/uploadFile', formData, {
+          const response = await axios.post('/uploadFile', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               'Authorization': `Bearer ${token}`
@@ -86,7 +86,7 @@
         const token = localStorage.getItem('authToken');
 
         try {
-          const response = await axios.post('/api/deleteFile', { url: file.url }, {
+          const response = await axios.post('/deleteFile', { url: file.url }, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -105,8 +105,6 @@
       }
     },
     created() {
-      // Fetch user data or get it from props
-      // Assuming userRole is passed as a prop or fetched from the API
       if (this.userRole === 'admin') {
         this.isAdmin = true;
       }
