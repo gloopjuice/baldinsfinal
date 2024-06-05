@@ -132,7 +132,7 @@ export default {
         delete formData.password;
       }
 
-      axios.put(`/api/updateUserProfile/${this.editForm.id}`, formData, {
+      axios.put(`/updateUserProfile/${this.editForm.id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
